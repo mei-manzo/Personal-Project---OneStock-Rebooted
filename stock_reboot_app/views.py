@@ -71,10 +71,6 @@ def feed_parser(request, id):
     for h in headers:
         header_dict.append(h.text)
         head = h.text
-        if len(Article.objects.filter(headliner=head)) >= 1:
-            pass
-        else: 
-            Article.objects.create(headliner=h.text, hyperlink= "", article_user = this_user[0], stock = this_stock[0])
     links = soup.find_all('a', style='text-decoration:none;display:block')
     link_dict = []
     full_links=[]
@@ -89,6 +85,13 @@ def feed_parser(request, id):
         split_string = string.split("&sa=", 1)
         substring = split_string[0]
         corrected_link.append(substring)
+    consolidated = {} 
+    for x in range (0, 10, 1):
+        consolidated[(header_dict[x])] = corrected_link[x]
+        if len(Article.objects.filter(headliner=head)) >= 1:
+            pass
+        else: 
+            Article.objects.create(headliner = header_dict[x], hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
     context = {
             "current_user" : this_user[0].first_name,
             "header_dict": header_dict,
