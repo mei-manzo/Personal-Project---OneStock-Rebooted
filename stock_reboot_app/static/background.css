@@ -1,0 +1,23 @@
+body{
+    background-color:dodgerblue;
+}
+
+.article{
+    background-color: lightgray;
+}
+
+#container{
+    display: flex;
+}
+
+#one-side{
+    flex:1;
+}
+
+#one-side-one{
+    flex:4;
+}
+
+#other-side{
+    flex:1;
+}

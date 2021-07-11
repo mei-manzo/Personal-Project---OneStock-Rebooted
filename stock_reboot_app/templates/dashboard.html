@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'background.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+<h1> Welcome, {{ current_user }} </h1><a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a> | <a href="/profile">Profile</a> | <a href="/success">Dashboard</a> | <a href="/buy_sell">Buy/Sell</a>
+<br><br>
+</body>
+</html> 

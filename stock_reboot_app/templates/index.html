@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">   
+    <title>OneStock Login Page</title>
+</head>
+<body>
+        <div id="container-1">
+            <h1>Get Started With OneStock</h1>
+            <h1>Registration</h1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/check_registration" method='POST'>
+                {% csrf_token %}
+                <div>
+                    <label for="first-name">First Name:</label>
+                    <input class="first-name" type="text" name = "first-name">
+                </div>
+                <div>
+                    <label for="last-name">Last Name:</label>
+                    <input class="last-name" type="text" name = "last-name">
+                </div>
+                <div>
+                    <label for="username">Username:</label>
+                    <input class="username" type="text" name = "username">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input class="email" type="email" name = "email">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input class="password" type="password" name = "password">
+                </div>
+                <div>
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input class="confirm-password" type="password" name = "confirm-password">
+                </div>
+                <input type="submit" value="Register" id = "button-1">
+            </form>
+        </div>
+        <div id="container-2">
+            <h1>Login</h1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/check_login" method='POST'>
+                {% csrf_token %}
+                <div>
+                    <label for="email">Email:</label>
+                    <input class="email" type="email" name = "email">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input class="password" type="password" name = "password">
+                </div>
+                <input type="submit" value="Login" id = "button-2">
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

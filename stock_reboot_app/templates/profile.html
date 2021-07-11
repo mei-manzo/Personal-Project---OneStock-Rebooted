@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'background.css' %}">   
+    <title>NASDAQ Stats</title>
+</head>
+<body>
+    <h1> {{ current_user }}'s Profile </h1> 
+    <a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a> | <a href="/success"> Return to Dashboard</a> | <a href="/buy_sell">Buy/Sell</a>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/check_stock_name" method='POST' id="add-form">
+        {% csrf_token %}
+        <p id = "">Add a stock to your portfolio:</p>
+        <div>
+            <label for="stock-option">Enter a Stock:</label>
+            <input class="stock-option" type="text" name = "stock-option">
+        </div>
+        <input type="submit" value="Submit Stocks" id = "button">
+    </form>
+    <br><br>
+    <h3>My Portfolio:</h3>
+    {% for stock in portfolio %}
+    Stock name:<a href="/feed/{{ stock.id }}"> {{ stock.stock_name }} </a> | <a href="/rm-stock/{{ stock.id }}"> Remove </a>
+    <hr>
+    <br><br>
+    {% endfor %}
+</body>
+</html> 
