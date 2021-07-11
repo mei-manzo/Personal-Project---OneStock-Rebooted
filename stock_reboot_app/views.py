@@ -96,6 +96,7 @@ def feed_parser(request, id):
             "current_user" : this_user[0].first_name,
             "header_dict": header_dict,
             "corrected_link": corrected_link,
+            "consolidated": consolidated,
         }
     return render(request, "feed.html", context)
 
@@ -180,3 +181,18 @@ def buy_sell(request):
         "current_user" : this_user[0].first_name,
         }
     return render(request, "buy_share.html", context)
+
+def save(request, headline):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    this_stock_start = Article.Objects.filter(headliner = headline)
+    this_stock = this_stock_start.stock_id
+    #check if article already saved
+    if len(Article.objects.filter(headliner = headline, article_user = request.session['user_id'])) >= 1:
+        return redirect(f"/feed/{this_stock.id}")
+    else: 
+        update_article = Article.objects.get(headliner = headline)
+        update_article.saved = True
+    return redirect(f"/feed/{this_stock.id}")
+

@@ -67,6 +67,7 @@ class Stock(models.Model):
     objects = StockManager()
 
 class Article(models.Model):
+    saved = models.BooleanField(default=False)
     headliner = models.TextField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
