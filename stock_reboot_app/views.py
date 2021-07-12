@@ -10,6 +10,7 @@ url_tuple = (
     ["GOOGL", 'https://www.google.com/search?q=google&rlz=1C1CHBF_enUS898US898&biw=1536&bih=534&tbm=nws&sxsrf=ALeKk02sMEdIqbvRgGDYGxQnCwwJCVwGfA%3A1625683430806&ei=5vXlYIfZMInM-gSr853ABA&oq=google&gs_l=psy-ab.3..0i433i131i67k1l2j0i433i67k1l2j0i433i131i67k1j0i433i67k1j0i433i131i67k1j0i433k1j0i433i67k1j0i67k1.28577185.28577714.0.28578680.6.3.0.2.2.0.265.549.0j2j1.3.0....0...1c.1.64.psy-ab..2.4.389...0i433i131k1.0.5KINMOYh_Pg', 'https://www.google.com/finance/quote/GOOGL:NASDAQ'],
     ["AMZN", 'https://www.google.com/search?q=amazon&rlz=1C1CHBF_enUS898US898&biw=1536&bih=754&tbm=nws&sxsrf=ALeKk00UgnFgnWgj2T_wGxHHJw-6YfiTVw%3A1625724146440&ei=8pTmYKenGsz_-wSFiJL4Dw&oq=amazon&gs_l=psy-ab.3..0i433i131i67k1l2j0i67k1j0i433i131k1j0i433i131i67k1j0i433k1j0i67k1j0i433i131k1j0i433k1l2.2159.4399.0.4666.17.8.0.3.3.0.127.605.3j3.7.0....0...1c.1.64.psy-ab..9.7.414.0..0i433i67k1.300.dJxWc9207vM', 'https://www.google.com/finance/quote/AMZN:NASDAQ']
 )
+#bynd meat stopped working three days ago, need to figure this out.
 
 def index(request):
     return render(request, "index.html")
@@ -78,7 +79,7 @@ def feed_parser(request, id):
         input_string = str(link.get('href'))
         input_string=input_string.replace('/url?q=', "")
         link_dict.append(input_string)
-    for x in range (16, 36, 2):
+    for x in range (16, 36, 2):#may need to increase index
         full_links.append(link_dict[x])
     corrected_link=[]
     for string in full_links:
@@ -86,7 +87,7 @@ def feed_parser(request, id):
         substring = split_string[0]
         corrected_link.append(substring)
     consolidated = {} 
-    for x in range (0, 10, 1):
+    for x in range (0, 10, 1): #investigate range, make sure catching correct headers
         consolidated[(header_dict[x])] = corrected_link[x]
         if len(Article.objects.filter(headliner=head)) >= 1:
             pass
@@ -135,7 +136,9 @@ def profile(request):
     this_user = User.objects.filter(id = request.session['user_id'])
     portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     context = {
+            "user": this_user[0],
             "current_user" : this_user[0].first_name,
+            "username" : this_user[0].username,
             "portfolio": portfolio,
         }
     return render(request, "profile.html", context)
@@ -182,17 +185,43 @@ def buy_sell(request):
         }
     return render(request, "buy_share.html", context)
 
-def save(request, headline):
+def save(request, headliner):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
-    this_stock_start = Article.Objects.filter(headliner = headline)
-    this_stock = this_stock_start.stock_id
+    this_stock_start = Article.objects.filter(headliner = headliner)
+    this_stock = this_stock_start[0].stock_id
     #check if article already saved
-    if len(Article.objects.filter(headliner = headline, article_user = request.session['user_id'])) >= 1:
-        return redirect(f"/feed/{this_stock.id}")
+    if len(Article.objects.filter(headliner = headliner, article_user = this_user[0].id, saved = True)) >= 1:
+        return redirect(f"/feed/{this_stock}")
     else: 
-        update_article = Article.objects.get(headliner = headline)
-        update_article.saved = True
-    return redirect(f"/feed/{this_stock.id}")
+        print("hello world")
+        print(headliner)
+        update_article = Article.objects.filter(headliner = headliner, article_user = this_user[0].id)
+        new_article = update_article[0]
+        print(new_article)
+        new_article.saved = True
+        new_article.save()
+        # update_article[0].saved = True
+        # print(update_article[0].saved)
+        # update_article[0].save()
+        # print(update_article[0].saved)
+    return redirect(f"/feed/{this_stock}")
 
+def update(request, id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    current_user = this_user[0]
+    current_user.username = request.POST['username']
+    current_user.save()
+    messages.error(request, "Successfully updated username")
+    return redirect('/profile')
+
+def delete(request, id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    current_user = this_user[0]
+    current_user.delete()
+    return redirect('/')

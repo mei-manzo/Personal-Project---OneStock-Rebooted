@@ -12,5 +12,7 @@ urlpatterns = [
     path('check_stock_name', views.check_stock),
     path('rm-stock/<int:id>', views.remove_stock),
     path('buy_sell', views.buy_sell),
-    path('save/<str:headline>', views.save),
+    path('save/<str:headliner>', views.save),
+    path('update_username/<int:id>', views.update),
+    path('delete/<int:id>', views.delete),
 ]

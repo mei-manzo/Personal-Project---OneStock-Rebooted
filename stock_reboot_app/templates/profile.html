@@ -18,6 +18,15 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <form action="/update_username/{{ user.id }}" method='POST' id="add-form">
+        {% csrf_token %}
+        <div>
+            <p class = "">Username:</p>
+            <textarea name="username">{{ username }}</textarea>      
+            <br><br>
+        </div>
+        <input type="submit" value="Update" id = "button">
+    </form>
     <form action="/check_stock_name" method='POST' id="add-form">
         {% csrf_token %}
         <p id = "">Add a stock to your portfolio:</p>
@@ -34,5 +43,9 @@
     <hr>
     <br><br>
     {% endfor %}
+    <form action="/delete/{{ user.id }}" method='POST' id="add-form">
+        {% csrf_token %}
+        <input type="submit" value="Delete Profile" id = "button">
+    </form>
 </body>
 </html> 
