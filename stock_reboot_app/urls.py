@@ -15,4 +15,5 @@ urlpatterns = [
     path('save/<str:headliner>', views.save),
     path('update_username/<int:id>', views.update),
     path('delete/<int:id>', views.delete),
+    path('unsave_profile/<str:headliner>', views.unsave_profile),
 ]

@@ -137,11 +137,13 @@ def profile(request):
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
     portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
+    saved_articles = Article.objects.filter(article_user_id=this_user[0].id, saved = True)
     context = {
             "user": this_user[0],
             "current_user" : this_user[0].first_name,
             "username" : this_user[0].username,
             "portfolio": portfolio,
+            "saved_articles": saved_articles,
         }
     return render(request, "profile.html", context)
 
@@ -222,3 +224,18 @@ def delete(request, id):
     current_user = this_user[0]
     current_user.delete()
     return redirect('/')
+
+def unsave_profile(request, headliner):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    this_stock_start = Article.objects.filter(headliner = headliner)
+    this_stock = this_stock_start[0].stock_id
+    #check if article already saved
+    update_article = Article.objects.filter(headliner = headliner, article_user = this_user[0].id)
+    new_article = update_article[0]
+    if len(Article.objects.filter(headliner = headliner, article_user = this_user[0].id, saved = True)) >= 1:
+        new_article.saved = False
+        new_article.save()
+        return redirect("/profile")
+    return redirect("/profile")

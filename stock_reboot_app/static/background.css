@@ -21,3 +21,10 @@ body{
 #other-side{
     flex:1;
 }
+
+#first{
+    flex:1
+}
+#second{
+    flex:1
+}
