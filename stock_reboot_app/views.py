@@ -92,7 +92,7 @@ def feed_parser(request, id):
             pass
         else: 
             Article.objects.create(headliner = header_dict[x], hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
-    user_saved_articles = Article.objects.filter(headliner = header_dict[x], article_user = this_user[0], saved = True)
+    user_saved_articles = Article.objects.filter(stock_id = id, article_user = this_user[0], saved = True)
     context = {
             "current_user" : this_user[0].first_name,
             "header_dict": header_dict,
@@ -163,7 +163,7 @@ def check_stock(request):
         #when we create a stock, let's add functionality to automatically add the correct URL.
         for t in url_tuple:
             if request.POST['stock-option'] == t[0]:
-                new_stock = Stock.objects.create(stock_name=request.POST['stock-option'], user=this_user, news_url = t[1], nasdaq_url = t[2] )
+                new_stock = Stock.objects.create(stock_name=request.POST['stock-option'], user=this_user, news_url = t[1], nasdaq_url = t[2]) #added
         portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
         context = {
             "current_user" : this_user.first_name,
