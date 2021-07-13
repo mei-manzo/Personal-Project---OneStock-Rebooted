@@ -20,7 +20,7 @@
                 {% endfor %}
             </ul>
             {% endif %}
-            <form action="/update_username/{{ user.id }}" method='POST' id="add-form">
+            <form action="/update_username" method='POST' id="add-form">
                 {% csrf_token %}
                 <div>
                     <p class = "">Username:</p>

@@ -13,7 +13,7 @@ urlpatterns = [
     path('rm-stock/<int:id>', views.remove_stock),
     path('buy_sell', views.buy_sell),
     path('save/<str:headliner>', views.save),
-    path('update_username/<int:id>', views.update),
+    path('update_username', views.update),
     path('delete/<int:id>', views.delete),
     path('unsave_profile/<str:headliner>', views.unsave_profile),
 ]

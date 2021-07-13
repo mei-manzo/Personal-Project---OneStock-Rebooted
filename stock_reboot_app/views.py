@@ -68,9 +68,10 @@ def feed_parser(request, id):
     #headers data parsed below:
     headers = soup.find_all('div', class_='BNeawe vvjwJb AP7Wnd')
     header_dict = []
-    for h in headers:
-        header_dict.append(h.text)
+    for h in headers: #need to sanitize /
         head = h.text
+        head=head.replace('/', "-")
+        header_dict.append(head)
     links = soup.find_all('a', style='text-decoration:none;display:block')
     link_dict = []
     full_links=[]
@@ -91,15 +92,18 @@ def feed_parser(request, id):
         if len(Article.objects.filter(headliner=head, article_user = this_user[0])) >= 1:
             pass
         else: 
-            Article.objects.create(headliner = header_dict[x], hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
+            Article.objects.create(headliner = (header_dict[x]), hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
     user_saved_articles = Article.objects.filter(stock_id = id, article_user = this_user[0], saved = True)
+    saved_headlines = []
+    for article in user_saved_articles:
+        saved_headlines.append(article.headliner)
     context = {
             "current_user" : this_user[0].first_name,
             "header_dict": header_dict,
             "corrected_link": corrected_link,
             "consolidated": consolidated,
             "user_saved_articles": user_saved_articles,
-            # "recent_ten_ascend": recent_ten_ascend,
+            "saved_headlines": saved_headlines,
         }
     return render(request, "feed.html", context)
 
@@ -167,9 +171,13 @@ def check_stock(request):
             if request.POST['stock-option'] == t[0]:
                 new_stock = Stock.objects.create(stock_name=request.POST['stock-option'], user=this_user, news_url = t[1], nasdaq_url = t[2]) #added
         portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
+        this_user = User.objects.filter(id = request.session['user_id'])
+        saved_articles = Article.objects.filter(article_user_id=this_user[0].id, saved = True)
         context = {
-            "current_user" : this_user.first_name,
+            "current_user" : this_user[0].first_name,
             "portfolio": portfolio,
+            "saved_articles": saved_articles,
+            "username" : this_user[0].username,
         }
         return render(request, "profile.html", context)
 
@@ -207,7 +215,7 @@ def save(request, headliner):
         new_article.save()
     return redirect(f"/feed/{this_stock}")
 
-def update(request, id):
+def update(request):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
