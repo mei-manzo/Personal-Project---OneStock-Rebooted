@@ -11,38 +11,23 @@
 <body>
     <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a> | <a href="/profile">Profile</a> | <a href="/success"> Return to Dashboard</a> | <a href="/buy_sell">Buy/Sell</a>
     <h2>Your Custom Feed</h2>
-    <!-- <div id="container">
-        <div id="one-side-one">
-            {% for object in header_dict %}
-                <p class="article">{{ object }}</p>
-                <hr>
-                <br><br>
-            {% endfor %}
-        </div>
-        <div id="other-side">
-            {% for link in corrected_link %}
-                <a href="{{ link }}">{{ link }}</a>
-                <br><br>
-                <br>
-                <hr>
-            {% endfor %}
-        </div>
-    </div> -->
+    <!-- {% for article in recent_ten_ascend %}
+        <p>{{ article.headliner }}</p>
+        <p>{{ article.hyperlink }}</p>
+    {% endfor %}  -->
     {% for key, value in consolidated.items %}
         <span>
             <a href="{{ value }}">
                 <p>{{ key }}</p>
             </a>
-            <a href="/save/{{ key }}">Save this Article</a>
+            {% if consolidated.key in user_saved_articles.all %}
+                <a href="/save/{{ key }}">Unsave</a>
+            {% else %}
+                <a href="/save/{{ key }}">Save this Article</a>
+            {% endif %}
         </span>
         <br><br>
         <hr>
-    {% endfor %}
-    {% for head in header_dict %}
-        <p>{{ head }}</p>
-    {% endfor %}
-    {% for link in corrected_link %}
-    <p>{{ link }}</p>
     {% endfor %}
 </body>
 </html> 
