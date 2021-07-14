@@ -16,13 +16,14 @@
             <a href="{{ value }}">
                 <p>{{ key }}</p>
             </a>
-                <a href="/save/{{ key }}">Save this Article</a>
+            {% if key in saved_headlines %}
+                <a href="/save/{{ key }}">Unsave</a>
+            {% else %}
+                <a href="/save/{{ key }}">Save </a>
+            {% endif %}
         </span>
         <br><br>
         <hr>
-    {% endfor %}
-    {% for item in saved_headlines %}
-    <p>{{ item }}</p>
     {% endfor %}
 </body>
 </html> 
