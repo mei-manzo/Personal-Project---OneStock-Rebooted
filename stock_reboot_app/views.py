@@ -6,9 +6,9 @@ import requests
 from bs4 import BeautifulSoup
 
 url_tuple = (
-    ["BYND", 'https://www.google.com/search?q=beyond+meat&rlz=1C1CHBF_enUS898US898&sxsrf=ALeKk00IH9jp1Kz5-LSyi7FUB4rd6--_hw:1624935518812&source=lnms&tbm=nws&sa=X&ved=2ahUKEwicqIbD7LvxAhVWo54KHXgRA9oQ_AUoAXoECAEQAw&biw=1536&bih=754', 'https://www.google.com/finance/quote/BYND:NASDAQ?sa=X&ved=2ahUKEwjJuJGoyr7xAhXVkWoFHX7jA6cQ_AUoAXoECAEQAw'],
     ["GOOGL", 'https://www.google.com/search?q=google&rlz=1C1CHBF_enUS898US898&biw=1536&bih=534&tbm=nws&sxsrf=ALeKk02sMEdIqbvRgGDYGxQnCwwJCVwGfA%3A1625683430806&ei=5vXlYIfZMInM-gSr853ABA&oq=google&gs_l=psy-ab.3..0i433i131i67k1l2j0i433i67k1l2j0i433i131i67k1j0i433i67k1j0i433i131i67k1j0i433k1j0i433i67k1j0i67k1.28577185.28577714.0.28578680.6.3.0.2.2.0.265.549.0j2j1.3.0....0...1c.1.64.psy-ab..2.4.389...0i433i131k1.0.5KINMOYh_Pg', 'https://www.google.com/finance/quote/GOOGL:NASDAQ'],
-    ["AMZN", 'https://www.google.com/search?q=amazon&rlz=1C1CHBF_enUS898US898&biw=1536&bih=754&tbm=nws&sxsrf=ALeKk00UgnFgnWgj2T_wGxHHJw-6YfiTVw%3A1625724146440&ei=8pTmYKenGsz_-wSFiJL4Dw&oq=amazon&gs_l=psy-ab.3..0i433i131i67k1l2j0i67k1j0i433i131k1j0i433i131i67k1j0i433k1j0i67k1j0i433i131k1j0i433k1l2.2159.4399.0.4666.17.8.0.3.3.0.127.605.3j3.7.0....0...1c.1.64.psy-ab..9.7.414.0..0i433i67k1.300.dJxWc9207vM', 'https://www.google.com/finance/quote/AMZN:NASDAQ']
+    ["AMZN", 'https://www.google.com/search?q=amazon&rlz=1C1CHBF_enUS898US898&biw=1536&bih=754&tbm=nws&sxsrf=ALeKk00UgnFgnWgj2T_wGxHHJw-6YfiTVw%3A1625724146440&ei=8pTmYKenGsz_-wSFiJL4Dw&oq=amazon&gs_l=psy-ab.3..0i433i131i67k1l2j0i67k1j0i433i131k1j0i433i131i67k1j0i433k1j0i67k1j0i433i131k1j0i433k1l2.2159.4399.0.4666.17.8.0.3.3.0.127.605.3j3.7.0....0...1c.1.64.psy-ab..9.7.414.0..0i433i67k1.300.dJxWc9207vM', 'https://www.google.com/finance/quote/AMZN:NASDAQ'],
+    ["BYND", 'https://www.google.com/search?q=beyond+meat&rlz=1C1CHBF_enUS898US898&sxsrf=ALeKk00IH9jp1Kz5-LSyi7FUB4rd6--_hw:1624935518812&source=lnms&tbm=nws&sa=X&ved=2ahUKEwicqIbD7LvxAhVWo54KHXgRA9oQ_AUoAXoECAEQAw&biw=1536&bih=754', 'https://www.google.com/finance/quote/BYND:NASDAQ?sa=X&ved=2ahUKEwjJuJGoyr7xAhXVkWoFHX7jA6cQ_AUoAXoECAEQAw']
 )
 
 def index(request):

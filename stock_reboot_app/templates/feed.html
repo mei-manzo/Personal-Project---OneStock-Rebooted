@@ -5,25 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'background.css' %}">
+    <link rel="stylesheet" href="{% static 'index.css' %}">   
     <title>Feed</title>
 </head>
 <body>
-    <h1> Welcome, {{ current_user }} </h1> <a href="/logout">Logout</a> | <a href="/stats">NASDAQ Stats</a> | <a href="/profile">Profile</a> | <a href="/success"> Return to Dashboard</a> | <a href="/buy_sell">Buy/Sell</a>
-    <h2>Your Custom Feed</h2>
-    {% for key, value in consolidated.items %}
-        <span>
-            <a href="{{ value }}">
-                <p>{{ key }}</p>
-            </a>
-            {% if key in saved_headlines %}
-                <a href="/save/{{ key }}">Unsave</a>
-            {% else %}
-                <a href="/save/{{ key }}">Save </a>
-            {% endif %}
-        </span>
-        <br><br>
-        <hr>
+    <div id="container">
+        <div id="first">
+            <div id="head">
+                <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo">
+                <h3 id="welcome1"> {{ current_user }}'s Profile </h3> 
+                <div id="links">
+                    <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+                </div>
+            </div>
+        <h2>Your Custom Feed</h2>
+        {% for key, value in consolidated.items %}
+            <span>
+                <a href="{{ value }}">
+                    <p>{{ key }}</p>
+                </a>
+                {% if key not in saved_headlines %}
+                    <a href="/save/{{ key }}">Save</a>
+                {% else %}
+                    <a href="/save/{{ key }}">Unsave</a>
+                {% endif %}
+            </span>
+            <br><br>
+            <hr>
+        {% endfor %}
+    {% for item in saved_headlines %}
+        <p>{{ item }}</p>
     {% endfor %}
 </body>
 </html> 
+
