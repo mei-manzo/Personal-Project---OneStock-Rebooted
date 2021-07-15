@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import *
 from django.db.models import Count
-import requests
+import requests, urllib.parse
 from bs4 import BeautifulSoup
 
 url_tuple = (
@@ -56,10 +56,13 @@ def success(request):
     return render(request, "dashboard.html", context)
 
 def feed_parser(request, id):
+    #check if user in session
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
+    #get stock we're looking at
     this_stock = Stock.objects.filter(id = id)
+    #get URL for webscraping
     for t in url_tuple:
         if this_stock[0].stock_name == t[0]:
             URL = t[1]
@@ -68,28 +71,33 @@ def feed_parser(request, id):
     #headers data parsed below:
     headers = soup.find_all('div', class_='BNeawe vvjwJb AP7Wnd')
     header_dict = []
-    for h in headers: #need to sanitize /
+    # sanitize_dict = ["/", "?", "(", ")", ",", "."]
+    for h in headers: 
         head = h.text
-        head=head.replace('/', "-")
+        head=head.replace("?", "").replace("/", "-") 
         header_dict.append(head)
     links = soup.find_all('a', style='text-decoration:none;display:block')
     link_dict = []
-    full_links=[]
+    full_links = []
+    #get all links from page using 'a' tag
     for link in soup.find_all('a'):
         input_string = str(link.get('href'))
         input_string=input_string.replace('/url?q=', "")
         link_dict.append(input_string)
-    for x in range (16, 36, 2):#may need to increase index
+    #get links in index that we want
+    for x in range (16, 36, 2):
         full_links.append(link_dict[x])
     corrected_link=[]
+    #add clickable links
     for string in full_links:
         split_string = string.split("&sa=", 1)
         substring = split_string[0]
         corrected_link.append(substring)
     consolidated = {} 
+    for x in range (0, 10, 1):
+            consolidated[(header_dict[x])] = corrected_link[x]
     for x in range (0, 10, 1): #investigate range, make sure catching correct headers
-        consolidated[(header_dict[x])] = corrected_link[x]
-        if len(Article.objects.filter(headliner=head, article_user = this_user[0])) >= 1:
+        if len(Article.objects.filter(headliner = header_dict[x], article_user = this_user[0])) >= 1:
             pass
         else: 
             Article.objects.create(headliner = (header_dict[x]), hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
@@ -206,6 +214,7 @@ def save(request, headliner):
     #check if article already saved
     update_article = Article.objects.filter(headliner = headliner, article_user = this_user[0].id)
     new_article = update_article[0]
+    
     if len(Article.objects.filter(headliner = headliner, article_user = this_user[0].id, saved = True)) >= 1:
         new_article.saved = False
         new_article.save()
