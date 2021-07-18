@@ -196,7 +196,25 @@ p{
 
 #links{
     margin-top: 20px;
-    margin-left: 100px;
+    margin-left: 150px;
+}
+#links a{
+    color: white;
+    text-decoration: none;
+}
+
+#dash-links-feed{
+    margin-left: 420px;
+    margin-top: 6px;
+    text-decoration: none;
+    flex:1;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+}
+#dash-links-feed a{
+    color: white;
+    text-decoration: none;
 }
 #dash-background{
     background-size: cover;
@@ -267,15 +285,16 @@ input{
     font-size: 1em;
 }
 
-#dash-links{
-    margin-left: 350px;
+#dash-links-new{
+    margin-left: 520px;
     margin-top: 6px;
+    text-decoration: none;
     flex:1;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: lighter;
 }
-#dash-links a{
+#dash-links-new a{
     color: white;
     text-decoration: none;
 } 
@@ -306,6 +325,13 @@ input{
     font-weight: lighter;
     font-size: 2em;
     color: darkslategrey;
+    border: 2px solid grey;
+    border-width: thin;
+    border-color: grey;
+    overflow: hidden;
+    -moz-box-shadow: 0px 0px 20px #b0b0b0;
+    -webkit-box-shadow: 0px 0px 10px #b0b0b0;
+    box-shadow: 0px 0px 5px #b0b0b0;
 }
 #dash-stuff-two{
     background-color:#e8e9ed;
@@ -328,21 +354,39 @@ input{
     font-weight: lighter;
     font-size: 2em;
     color: darkslategrey;
+    border: 2px solid grey;
+    border-width: thin;
+    border-color: grey;
+    overflow: hidden;
+    -moz-box-shadow: 0px 0px 20px #b0b0b0;
+    -webkit-box-shadow: 0px 0px 10px #b0b0b0;
+    box-shadow: 0px 0px 5px #b0b0b0;
 }
+
 #dash-news-all{
     display: flex;
 }
 #dash-news-all p{
     font-size: .5em;
     flex: 60;
-    width: 40%;
+    margin-bottom: 0px;
+    margin-top: 20px;
 }
 #dash-news-all a{
-    margin-top: 14px;
+    margin-top: 18px;
     flex: 103;
     font-size: .5em;
     width: 50px;
 }
+li{
+    font-size: .7em;
+    height: 20px;
+    list-style-type: none;
+}
+#small-news-container{
+    display: flex;
+}
+
 #dash-stats-all{
     display: flex;
 }
@@ -383,6 +427,13 @@ input{
     font-weight: lighter;
     font-size: 2em;
     color: darkslategrey;
+    border: 2px solid grey;
+    border-width: thin;
+    border-color: grey;
+    overflow: hidden;
+    -moz-box-shadow: 0px 0px 20px #b0b0b0;
+    -webkit-box-shadow: 0px 0px 10px #b0b0b0;
+    box-shadow: 0px 0px 5px #b0b0b0;
 }
 #bynd-logo{
     width: 30px;

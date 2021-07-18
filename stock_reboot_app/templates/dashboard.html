@@ -15,42 +15,45 @@
     <div id="dash-all">
         <div id="navbar">
             <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
-            <div id="dash-links">
+            <div id="dash-links-new">
                 <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
             </div>
         </div> 
         <div id="dash-stuff">
             <div id="dash-portfolio">My Portfolio
-                {% for stock in portfolio %}
-                    {% if stock.stock_name == "BYND" %}
-                        <a href="/feed/{{ stock.id }}">
-                            <img id="bynd-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
-                        </a>
-                    {% elif stock.stock_name == "AMZN" %}
-                        <a href="/feed/{{ stock.id }}">
-                            <img id="amzn-logo" src="{% static 'amazon.jpg' %}" alt="amazon logo">
-                        </a>
-                    {% elif stock.stock_name == "GOOGL" %}
-                        <a href="/feed/{{ stock.id }}">
-                            <img id="googl-logo" src="{% static 'google.jpg' %}" alt="google logo">
-                        </a>
-                    {% endif %}
-                {% endfor %}
+                {% if number_of_stocks == 0 %}
                 <div id="dash-p-content">
-                    {% if number_of_stocks == 0 %}
-                        <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
-                    {% endif %}
+                    <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
                 </div>
+                {% else %}
+                    {% for stock in portfolio %}
+                        {% if stock.stock_name == "BYND" %}
+                            <a href="/feed/{{ stock.id }}">
+                                <img id="bynd-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
+                            </a>
+                        {% elif stock.stock_name == "AMZN" %}
+                            <a href="/feed/{{ stock.id }}">
+                                <img id="amzn-logo" src="{% static 'amazon.jpg' %}" alt="amazon logo">
+                            </a>
+                        {% elif stock.stock_name == "GOOGL" %}
+                            <a href="/feed/{{ stock.id }}">
+                                <img id="googl-logo" src="{% static 'google.jpg' %}" alt="google logo">
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
             <div id="dash-news">My News Feed
                 <div id="dash-news-all">
                     {% if number_of_stocks == 0 %}
                     <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
-                {% else %}
+                    {% else %}
                         <p>You have new articles to read. Click on one of your stocks to view them.</p>
-                    {% for stock in portfolio %}
-                        <p><a href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></p>
-                    {% endfor %}
+                    <div id="">
+                        {% for stock in portfolio %}
+                            <li><a id="small-news" href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></li>
+                        {% endfor %}
+                    </div>
                 {% endif %}
                 </div>
             </div>

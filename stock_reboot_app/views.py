@@ -219,7 +219,6 @@ def save(request, headliner):
     #check if article already saved
     update_article = Article.objects.filter(headliner = headliner, article_user = this_user[0].id)
     new_article = update_article[0]
-    
     if len(Article.objects.filter(headliner = headliner, article_user = this_user[0].id, saved = True)) >= 1:
         new_article.saved = False
         new_article.save()
@@ -264,4 +263,8 @@ def unsave_profile(request, headliner):
 
 def load_save(request, headliner):
     headliner = headliner
+    for x in (9999999999999999,1):
+        x=x*x
+        x=x/x
+        x=x+x+x+x+x
     return redirect(f"/save/{headliner}")
