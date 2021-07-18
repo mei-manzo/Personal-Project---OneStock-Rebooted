@@ -6,30 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
     <link rel="stylesheet" href="{% static 'index.css' %}">   
-    <title>NASDAQ Stats</title>
+    <title>Stats</title>
 </head>
-<body>
-    <div id="container">
-        <div id="first">
-            <div id="head">
-                <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo">
-                <h3 id="welcome1"> {{ current_user }}'s Profile </h3> 
-                <div id="links">
-                    <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
+            <div id="dash-links-feed">
+                <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+            </div>        
+        </div> 
+        <div id="dash-stuff">
+            <div id="dash-stats">
+                <h2>Your NASDAQ Stats</h2>
+                <div id="nas-stats-container">
+                    <div id = "other-side">
+                        {% for stock in this_stock %}
+                        <p> {{ stock.stock_name }} </p>
+                        {% endfor %}
+                    </div>
+                    <div id = "one-side">
+                        {% for object in progress_dict %}
+                        <p>Stock Price: {{ object }} </p>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-    <h2>Your NASDAQ Stats</h2>
-    <div id="container">
-        <div id = "other-side">
-            {% for stock in this_stock %}
-            <p> {{ stock.stock_name }} </p>
-            {% endfor %}
+            </div>    
         </div>
-        <div id = "one-side">
-            {% for object in progress_dict %}
-            <p>Stock Price: {{ object }} </p>
-            {% endfor %}
-        </div>
+    </div>
+    <hr id="">
+    <div id="feed-bottom-line">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
     </div>
 </body>
 </html> 

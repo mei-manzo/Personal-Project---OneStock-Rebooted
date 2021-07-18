@@ -8,21 +8,38 @@
     <link rel="stylesheet" href="{% static 'index.css' %}">   
     <title>Buy/Sell</title>
 </head>
-<body>
-    <div id="container">
-        <div id="first">
-            <div id="head">
-                <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo">
-                <h3 id="welcome1"> {{ current_user }}'s Profile </h3> 
-                <div id="links">
-                    <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
-                </div>
-            </div>
-    <h2>Buy/Sell Shares</h2>
-    <a href="https://robinhood.com/us/en/">Robinhood</a>
-    <br><br>
-    <a href="https://www.tdameritrade.com/home.html">Ameritrade</a>
-    <br><br>
-    <a href="https://www.webull.com/">Webull</a>
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
+            <div id="dash-links-feed">
+                <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+            </div>        
+        </div> 
+        <div id="dash-stuff">
+            <div id="dash-stats-buy">
+                <h2 id="ready">Ready to trade? Navigate to one of these external sites to buy/sell.</h2>
+                <a class="external" href="https://robinhood.com/us/en/">Robinhood</a>
+                <br><br>
+                <a class="external" href="https://www.tdameritrade.com/home.html">Ameritrade</a>
+                <br><br>
+                <a class="external" href="https://www.webull.com/">Webull</a>
+                <br><br>
+                <h3 id="ready-small">Still not sure? Go back to <a href="/success">dashboard</a>.</h2>
+            </div>    
+        </div>
+    </div>
+    <hr id="">
+    <div id="feed-bottom-line">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div>
 </body>
 </html> 
+
+
+
+
