@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--  {% load static %}-->
+    <link rel="stylesheet" href="index.css">   
+    <title>Profile</title>
+</head>
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
+            <div id="dash-links-feed">
+                <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+            </div>        
+        </div> 
+        <div id="dash-stuff-profile">
+            <div id="first">
+             <!--   {% if messages %} ->
+                <ul class="messages">    
+               <!--     {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %} 
+                </ul>
+                {% endif %} -->
+		<p id = "bold">Update Username:</p>
+                <form action="/update_username" method='POST' id="add-form">
+                 <!--   {% csrf_token %} -->
+                        <p class = "size">Username:</p>
+                        <textarea name="username">{{ username }}</textarea>      
+                    <input type="submit" value="Update" id = "button">
+                </form>
+                <form action="/check_stock_name" method='POST' id="add-form-stock">
+                 <!--   {% csrf_token %} -->
+                    <p id = "bold">Add a stock to your portfolio:</p>
+                    <div ="add-stock">
+                        <label for="stock-option">Enter a Stock:</label>
+                        <input class="stock-option" type="text" name = "stock-option" id="stock-textarea">
+                    	<input type="submit" value="Submit Stocks" id = "stock-button">
+		    </div>
+                </form>
+                <br><br>
+                <h3>My Portfolio:</h3>
+                {% for stock in portfolio %}
+                Stock name:<a id="no-style" href="/feed/{{ stock.id }}"> {{ stock.stock_name }} </a> | <a href="/rm-stock/{{ stock.id }}"> Remove </a>
+                <br><br>
+                {% endfor %}
+                <form action="/delete/{{ user.id }}" method='POST' id="add-form-delete">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete Profile" id = "button">
+                </form>
+            </div>
+            <div id="second">
+                <h2>My Saved Articles</h2>
+                {% for article in saved_articles%}
+                    <a href="{{ article.hyperlink }}">
+                        <p>{{ article.headliner }}</p>
+                    </a>
+                    <a href="/unsave_profile/{{ article.headliner }}">Unsave</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <hr id="">
+    <div id="feed-bottom-line">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div>
+</body>
+</html> 
+

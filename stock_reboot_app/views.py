@@ -155,12 +155,14 @@ def profile(request):
     this_user = User.objects.filter(id = request.session['user_id'])
     portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     saved_articles = Article.objects.filter(article_user_id=this_user[0].id, saved = True)
+    number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
     context = {
             "user": this_user[0],
             "current_user" : this_user[0].first_name,
             "username" : this_user[0].username,
             "portfolio": portfolio,
             "saved_articles": saved_articles,
+            "number_of_stocks": number_of_stocks,
         }
     return render(request, "profile.html", context)
 
@@ -222,11 +224,11 @@ def save(request, headliner):
     if len(Article.objects.filter(headliner = headliner, article_user = this_user[0].id, saved = True)) >= 1:
         new_article.saved = False
         new_article.save()
-        return redirect(f"/feed/{this_stock}")
+        return redirect("/profile")
     else: 
         new_article.saved = True
         new_article.save()
-    return redirect(f"/feed/{this_stock}")
+    return redirect("/profile")
 
 def update(request):
     if 'user_id' not in request.session:
@@ -263,8 +265,18 @@ def unsave_profile(request, headliner):
 
 def load_save(request, headliner):
     headliner = headliner
-    for x in (9999999999999999,1):
-        x=x*x
-        x=x/x
-        x=x+x+x+x+x
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
+    saved_articles = Article.objects.filter(article_user_id=this_user[0].id, saved = True)
+    number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
+    context = {
+            "user": this_user[0],
+            "current_user" : this_user[0].first_name,
+            "username" : this_user[0].username,
+            "portfolio": portfolio,
+            "saved_articles": saved_articles,
+            "number_of_stocks": number_of_stocks,
+        }
     return redirect(f"/save/{headliner}")
