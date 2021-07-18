@@ -8,32 +8,44 @@
     <link rel="stylesheet" href="{% static 'index.css' %}">   
     <title>Feed</title>
 </head>
-<body>
-    <div id="container">
-        <div id="first">
-            <div id="head">
-                <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo">
-                <h3 id="welcome1"> {{ current_user }}'s Profile </h3> 
-                <div id="links">
-                    <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
-                </div>
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
+            <div id="dash-links">
+                <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
             </div>
-        <h2>Your Custom Feed</h2>
-        {% for key, value in consolidated.items %}
-            <span>
-                <a href="{{ value }}">
-                    <p>{{ key }}</p>
-                </a>
-                {% if key not in saved_headlines %}
-                    <a href="/save/{{ key }}">Save</a>
-                {% else %}
-                    <a href="/save/{{ key }}">Unsave</a>
-                {% endif %}
-            </span>
-            <br><br>
-            <hr>
-        {% endfor %}
-    <script type="text/javascript" src="/js/maintainscroll.jquery.min.js"></script>
+        </div> 
+        <div id="dash-stuff">
+        <h2 id="custom-feed">Your Custom Feed</h2>
+            {% for key, value in consolidated.items %}
+                <div id="feed-article">
+                    {% if stock_name == "BYND" %}
+                        <img id="b-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
+                    {% elif stock_name == "AMZN" %}
+                        <img id="a-logo" src="{% static 'amazon.jpg' %}" alt="amazon logo">
+                    {% elif stock_name == "GOOGL" %}
+                        <img id="g-logo" src="{% static 'google.jpg' %}" alt="google logo">
+                    {% endif %}
+                        <a id = "feed-link" href="{{ value }}">
+                            <p>{{ key }}</p>
+                        </a>
+                        {% if key not in saved_headlines %}
+                            <a class="saver" href="/load_save/{{ key }}">Save</a>
+                        {% else %}
+                            <a class="unsaver" href="/load_save/{{ key }}">Unsave</a>
+                        {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr id="">
+    <div id="feed-bottom-line">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div>
 </body>
 </html> 
-

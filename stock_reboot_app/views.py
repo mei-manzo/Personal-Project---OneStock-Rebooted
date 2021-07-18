@@ -51,9 +51,11 @@ def success(request):
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
     portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
+    number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
     context = {
         "current_user" : this_user[0].first_name,
         "portfolio": portfolio,
+        "number_of_stocks": number_of_stocks,
         }
     return render(request, "dashboard.html", context)
 
@@ -104,6 +106,7 @@ def feed_parser(request, id):
             Article.objects.create(headliner = (header_dict[x]), hyperlink= corrected_link[x], article_user = this_user[0], stock = this_stock[0])
     user_saved_articles = Article.objects.filter(stock_id = id, article_user = this_user[0], saved = True)
     saved_headlines = []
+    stock_name = this_stock[0].stock_name
     for article in user_saved_articles:
         saved_headlines.append(article.headliner)
     context = {
@@ -113,6 +116,7 @@ def feed_parser(request, id):
             "consolidated": consolidated,
             "user_saved_articles": user_saved_articles,
             "saved_headlines": saved_headlines,
+            "stock_name": stock_name,
         }
     return render(request, "feed.html", context)
 
@@ -257,3 +261,7 @@ def unsave_profile(request, headliner):
         new_article.save()
         return redirect("/profile")
     return redirect("/profile")
+
+def load_save(request, headliner):
+    headliner = headliner
+    return redirect(f"/save/{headliner}")

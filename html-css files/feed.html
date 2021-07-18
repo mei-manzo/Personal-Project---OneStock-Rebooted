@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- {% load static %} -->
+  <!--  {% load static %} -->
     <link rel="stylesheet" href="index.css">   
-    <title>OneStock Dashboard</title>
+    <title>Feed</title>
 </head>
 <body id="wavy-body">
     <div id="floating-logo">
@@ -20,19 +20,27 @@
             </div>
         </div> 
         <div id="dash-stuff">
-            <div id="dash-portfolio">My Portfolio</div>
-            <div id="dash-news">My News Feed
-                <p>You have new articles to read. Click on one of your stocks to view them.</p>
-            </div>
-            <div id="dash-stats">Statistics
-                <span><p>View your latest stats</p><a href="/stats">here.</a></span>
-            </div>
+        <h2 id="custom-feed">Your Custom Feed</h2>
+        {% for key, value in consolidated.items %}
+            <span id="feed-article">
+                <a href="{{ value }}">
+                    <p>{{ key }}</p>
+                </a>
+                {% if key not in saved_headlines %}
+                    <a href="/save/{{ key }}">Save</a>
+                {% else %}
+                    <a href="/save/{{ key }}">Unsave</a>
+                {% endif %}
+            </span>
+            <br><br>
+            <hr>
+        {% endfor %}
         </div>
     </div>
-    <hr id="dash-bottom-line">
-    <div id="dash-footer">
+    <hr id="bottom-line">
+    <div id="footer">
         <h4>OneStock Investment Tools</h4>
-        <h5 id="copyright-dash">Copyright 2020-2021. All rights reserved.</h5>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
     </div>
 </body>
 </html> 

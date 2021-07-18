@@ -1,29 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang = "en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'index.css' %}">   
-    <title>OneStock Dashboard</title>
-</head>
-<body>
-<div id="head">
-    <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo"> <h3 id="welcome1"> Welcome, {{ current_user }} </h3> 
-    <div id="links">
-        <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
-    </div>
-</div>
-<div id="welcome-pic">
-    <img id="dash-background" src="{% static 'minimal_mountains.jpg' %}" alt="background">
-</div>
-    <div id="dash-footer">
-        <h4>OneStock Investment Tools</h4>
-    </div>
-</body>
-</html>  -->
-
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -36,45 +10,64 @@
 </head>
 <body id="wavy-body">
     <div id="floating-logo">
-        <img id="logo" src="artsy_white_logo.png" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
     </div>
     <div id="dash-all">
         <div id="navbar">
-            <h3 id="dash-welcome"> Welcome {{ current_user }} </h3> 
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
             <div id="dash-links">
                 <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
             </div>
         </div> 
         <div id="dash-stuff">
-            <div id="dash-portfolio">My Portfolio</div>
-            {% for stock in portfolio %}
-                {% if stock.stock_name == "BYND" %}
-                    <a href="/feed/{{ stock.id }}">
-                        <img id="bynd-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
-                    </a>
-                {% elif stock.stock_name == "AMZN" %}
-                    <a href="/feed/{{ stock.id }}">
-                        <img id="amzn-logo" src="{% static 'amazon.jpg' %}" alt="amazon logo">
-                    </a>
-                {% elif stock.stock_name == "GOOGL" %}
-                    <a href="/feed/{{ stock.id }}">
-                        <img id="googl-logo" src="{% static 'google.jpg' %}" alt="google logo">
-                    </a>
-                {% endif %}
-            {% endfor %}
-            <div id="dash-news">My News Feed
-                <p>You have new articles to read. Click on one of your stocks to view them.</p>
+            <div id="dash-portfolio">My Portfolio
                 {% for stock in portfolio %}
-                <p><a href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></p>
+                    {% if stock.stock_name == "BYND" %}
+                        <a href="/feed/{{ stock.id }}">
+                            <img id="bynd-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
+                        </a>
+                    {% elif stock.stock_name == "AMZN" %}
+                        <a href="/feed/{{ stock.id }}">
+                            <img id="amzn-logo" src="{% static 'amazon.jpg' %}" alt="amazon logo">
+                        </a>
+                    {% elif stock.stock_name == "GOOGL" %}
+                        <a href="/feed/{{ stock.id }}">
+                            <img id="googl-logo" src="{% static 'google.jpg' %}" alt="google logo">
+                        </a>
+                    {% endif %}
                 {% endfor %}
+                <div id="dash-p-content">
+                    {% if number_of_stocks == 0 %}
+                        <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="dash-news">My News Feed
+                <div id="dash-news-all">
+                    {% if number_of_stocks == 0 %}
+                    <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
+                {% else %}
+                        <p>You have new articles to read. Click on one of your stocks to view them.</p>
+                    {% for stock in portfolio %}
+                        <p><a href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></p>
+                    {% endfor %}
+                {% endif %}
+                </div>
             </div>
             <div id="dash-stats">Statistics
-                <p></p>
+                <div id="dash-stats-all">
+                    <p>Load your custom stats</p><a href="/stats">here</a>
+                </div>
             </div>
         </div>
     </div>
-    <hr id="bottom-line">
+    <!-- <hr id="bottom-line">
     <div id="footer">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div> -->
+    <hr id="">
+    <div id="feed-bottom-line">
         <h4>OneStock Investment Tools</h4>
         <h5>Copyright 2020-2021. All rights reserved.</h5>
     </div>
