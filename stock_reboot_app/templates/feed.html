@@ -30,7 +30,7 @@
                     {% elif stock_name == "GOOGL" %}
                         <img id="g-logo" src="{% static 'google.jpg' %}" alt="google logo">
                     {% endif %}
-                        <a id = "feed-link" href="{{ value }}">
+                        <a id = "feed-link" href="{{ value }}" target = "_blank">
                             <p>{{ key }}</p>
                         </a>
                         {% if key not in saved_headlines %}

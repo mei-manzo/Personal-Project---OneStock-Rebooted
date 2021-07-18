@@ -143,7 +143,7 @@
                 <h2 class="light">My Saved Articles</h2>
                     {% for article in saved_articles%}
                     <div id="nas-stats-container">
-                        <a id="articles" href="{{ article.hyperlink }}">
+                        <a id="articles" href="{{ article.hyperlink }}" target = "_blank">
                             <p>{{ article.headliner }}</p>
                         </a>
                         <a  id="unsave-btn" href="/unsave_profile/{{ article.headliner }}">Unsave</a>
