@@ -396,9 +396,6 @@ input{
     box-shadow: 0px 0px 5px black;
 }
 
-#dash-news-all{
-    display: flex;
-}
 #dash-news-all-p{
     font-size: .5em;
     flex: 60;
@@ -412,13 +409,11 @@ input{
     width: 50px;
 }
 li{
-    font-size: .7em;
+    font-size: .5em;
     height: 20px;
     list-style-type: none;
 }
-#small-news-container{
-    display: flex;
-}
+
 #you-have-new-news{
     font-size: .5em;
     margin-bottom: 0px;
