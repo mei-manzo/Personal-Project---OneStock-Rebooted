@@ -15,7 +15,7 @@
                 <h1 id="one-stock">OneStock</h1><img id="logo" src="{% static 'onestock_logo_wings.png' %}" alt="one stock logo">
                 <h3 id="welcome1"> {{ current_user }}'s Profile </h3> 
                 <div id="links">
-                    <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+                    <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
                 </div>
             </div>
         <h2>Your Custom Feed</h2>
@@ -33,9 +33,7 @@
             <br><br>
             <hr>
         {% endfor %}
-    {% for item in header_dict %}
-        <p>{{ item }}</p>
-    {% endfor %}
+    <script type="text/javascript" src="/js/maintainscroll.jquery.min.js"></script>
 </body>
 </html> 
 

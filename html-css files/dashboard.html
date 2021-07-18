@@ -4,22 +4,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- {% load static %} -->
+    <!-- {% load static %} -->
     <link rel="stylesheet" href="index.css">   
     <title>OneStock Dashboard</title>
 </head>
-<body>
-<div id="head">
-    <h1 id="one-stock">OneStock</h1><img id="logo" src="onestock_logo_wings.png" alt="one stock logo"> <h3 id="welcome1"> Welcome, {{ current_user }} </h3> 
-	<div id="links">
-		<a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
-	</div>
-</div>
-<div id="welcome-pic">
-	<img id="dash-background" src="minimal_mountains.jpg" alt="background">
-</div>
-   <div id="dash-footer">
-       <h4>OneStock Investment Tools</h4>
-   </div>
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="artsy_white_logo.png" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome {{ current_user }} </h3> 
+            <div id="dash-links">
+                <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+            </div>
+        </div> 
+        <div id="dash-stuff">
+            <div id="dash-portfolio">My Portfolio</div>
+            <div id="dash-news">My News Feed
+                <p>You have new articles to read. Click on one of your stocks to view them.</p>
+            </div>
+            <div id="dash-stats">Statistics
+                <span><p>View your latest stats</p><a href="/stats">here.</a></span>
+            </div>
+        </div>
+    </div>
+    <hr id="bottom-line">
+    <div id="footer">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div>
 </body>
 </html> 

@@ -50,8 +50,10 @@ def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
+    portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     context = {
         "current_user" : this_user[0].first_name,
+        "portfolio": portfolio,
         }
     return render(request, "dashboard.html", context)
 
@@ -71,7 +73,6 @@ def feed_parser(request, id):
     #headers data parsed below:
     headers = soup.find_all('div', class_='BNeawe vvjwJb AP7Wnd')
     header_dict = []
-    # sanitize_dict = ["/", "?", "(", ")", ",", "."]
     for h in headers: 
         head = h.text
         head=head.replace("?", "").replace("/", "-") 
