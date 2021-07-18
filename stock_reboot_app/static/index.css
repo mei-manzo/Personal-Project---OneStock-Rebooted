@@ -366,13 +366,13 @@ input{
 #dash-news-all{
     display: flex;
 }
-#dash-news-all p{
+#dash-news-all-p{
     font-size: .5em;
     flex: 60;
     margin-bottom: 0px;
     margin-top: 20px;
 }
-#dash-news-all a{
+#dash-news-all-a{
     margin-top: 18px;
     flex: 103;
     font-size: .5em;
@@ -385,6 +385,11 @@ li{
 }
 #small-news-container{
     display: flex;
+}
+#you-have-new-news{
+    font-size: .5em;
+    margin-bottom: 0px;
+    margin-top: 20px;
 }
 
 #dash-stats-all{

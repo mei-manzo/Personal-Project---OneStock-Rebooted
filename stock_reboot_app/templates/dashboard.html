@@ -46,12 +46,12 @@
             <div id="dash-news">My News Feed
                 <div id="dash-news-all">
                     {% if number_of_stocks == 0 %}
-                    <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
+                        <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click</p><a id ="dash-news-all-a" href="/profile">here</a>
                     {% else %}
-                        <p>You have new articles to read. Click on one of your stocks to view them.</p>
-                    <div id="">
+                        <p id="you-have-new-news">You have new articles to read. Click on one of your stocks to view them.</p>
+                    <div id="small-news-container">
                         {% for stock in portfolio %}
-                            <li><a id="small-news" href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></li>
+                            <li><a id="a-li" href="/feed/{{ stock.id }}">{{ stock.stock_name }}</a></li>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -64,11 +64,6 @@
             </div>
         </div>
     </div>
-    <!-- <hr id="bottom-line">
-    <div id="footer">
-        <h4>OneStock Investment Tools</h4>
-        <h5>Copyright 2020-2021. All rights reserved.</h5>
-    </div> -->
     <hr id="">
     <div id="feed-bottom-line">
         <h4>OneStock Investment Tools</h4>
