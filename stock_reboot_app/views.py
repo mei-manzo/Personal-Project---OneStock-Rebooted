@@ -125,6 +125,7 @@ def stats(request):
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
     this_stock = Stock.objects.filter(user_id = request.session['user_id'])
+    number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
     progress_dict = []
     for object in this_stock:
         URL = object.nasdaq_url
@@ -140,6 +141,7 @@ def stats(request):
             "current_user" : this_user[0].first_name,
             "progress_dict": progress_dict,
             "this_stock": this_stock,
+            "number_of_stocks": number_of_stocks,
         }
     return render(request, "nasdaq.html", context)
 

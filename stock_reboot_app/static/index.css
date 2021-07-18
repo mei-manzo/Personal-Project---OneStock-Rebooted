@@ -366,6 +366,45 @@ input{
     -webkit-box-shadow: 0px 0px 10px black;
     box-shadow: 0px 0px 5px black;
 }
+#dash-portfolio img{
+    margin-left: 110px;
+    margin-bottom: 50px;
+    margin-top: 0px;
+    height: 90px;
+    width: 180px;
+    color: white;
+    background-color: white;
+    padding-top: 0px;
+}
+.error{
+    font-size: 1em;
+}
+#dash-portfolio p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 1em;
+    color: darkslategrey;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+#amzn-logo{
+    width: 200px;
+    height: 100px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+#bynd-logo{
+    width: 400px;
+    height: 200px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+#googl-logo{
+    width: 200px;
+    height: 100px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
 #dash-stuff-two{
     background-color:#e8e9ed;
     height: 700px;
@@ -398,14 +437,12 @@ input{
 
 #dash-news-all-p{
     font-size: .5em;
-    flex: 60;
     margin-bottom: 0px;
     margin-top: 20px;
 }
 #dash-news-all-a{
     margin-top: 18px;
-    flex: 103;
-    font-size: .5em;
+    font-size: 1em;
     width: 50px;
 }
 li{
@@ -425,27 +462,23 @@ li{
 }
 #dash-stats-all p{
     font-size: .5em;
-    flex: 2;
-    width: 40%;
+    width: 800px;
 }
 #dash-stats-all a{
     margin-top: 14px;
-    flex: 11;
-    font-size: .5em;
+    font-size: 1em;
     width: 50px;
 }
-#dash-p-content{
-    display:flex;
-}
+
 #dash-p-content p{
     font-size: .5em;
     flex: 60;
-    width: 40%;
+    width: 800px;
 }
 #dash-p-content a{
     margin-top: 14px;
     flex: 103;
-    font-size: .5em;
+    font-size: 1em;
     width: 50px;
 }
 #dash-stats{

@@ -20,15 +20,16 @@
             </div>
         </div> 
         <div id="dash-stuff">
-            <div id="dash-portfolio">My Portfolio
+            <div id="dash-portfolio">
+                <p>My Portfolio</p>
                 {% if number_of_stocks == 0 %}
                 <div id="dash-p-content">
-                    <p>You have no stocks in your portfolio. To get started, click</p><a href="/profile">here</a>
+                    <p>You have no stocks in your portfolio. To get started, click <a href="/profile">here</a>.</p>
                 </div>
                 {% else %}
                     {% for stock in portfolio %}
                         {% if stock.stock_name == "BYND" %}
-                            <a href="/feed/{{ stock.id }}">
+                            <a id="" href="/feed/{{ stock.id }}">
                                 <img id="bynd-logo" src="{% static 'beyondlogo.jpg' %}" alt="beyond logo">
                             </a>
                         {% elif stock.stock_name == "AMZN" %}
@@ -46,7 +47,7 @@
             <div id="dash-news">My News Feed
                 <div id="dash-news-all">
                     {% if number_of_stocks == 0 %}
-                        <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click</p><a id ="dash-news-all-a" href="/profile">here</a>
+                        <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click <a id ="dash-news-all-a" href="/profile">here</a>.</p>
                     {% else %}
                         <p id="you-have-new-news">You have new articles to read. Click on one of your stocks to view them.</p>
                     <div id="small-news-container">
@@ -59,7 +60,7 @@
             </div>
             <div id="dash-stats">Statistics
                 <div id="dash-stats-all">
-                    <p>Load your custom stats</p><a href="/stats">here</a>
+                    <p>Load your custom stats <a href="/stats">here</a>. Note: please allow 1-2 minutes for stats to generate.</p>
                 </div>
             </div>
         </div>

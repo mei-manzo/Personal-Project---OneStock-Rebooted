@@ -117,7 +117,7 @@
                 </form>
                 <form action="/check_stock_name" method='POST' id="add-form-stock">
                     {% csrf_token %}
-                    <p id = "bold">Add a stock to your portfolio:</p>
+                    <p id = "bold">Add a stock to your portfolio. Choose from the following: BYND, AMZN, GOOGL</p>
                     <div id="add-stock">
                         <label for="stock-option">Enter a Stock:</label>
                         <input class="stock-option" type="text" name = "stock-option" id="stock-textarea">

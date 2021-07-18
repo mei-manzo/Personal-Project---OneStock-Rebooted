@@ -22,18 +22,22 @@
         <div id="dash-stuff">
             <div id="dash-stats-buy">
                 <h2 id="">Your NASDAQ Stats</h2>
-                <div id="nas-stats-container">
-                    <div id = "other-side">
-                        {% for stock in this_stock %}
-                        <p> {{ stock.stock_name }} </p>
-                        {% endfor %}
+                {% if number_of_stocks == 0 %}
+                    <p>You have no stocks being tracked. Click <a href="/profile">here</a> to get started.</p>
+                {% else %}
+                    <div id="nas-stats-container">
+                        <div id = "other-side">
+                            {% for stock in this_stock %}
+                            <p> {{ stock.stock_name }} </p>
+                            {% endfor %}
+                        </div>
+                        <div id = "one-side">
+                            {% for object in progress_dict %}
+                            <p>Stock Price: {{ object }} </p>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div id = "one-side">
-                        {% for object in progress_dict %}
-                        <p>Stock Price: {{ object }} </p>
-                        {% endfor %}
-                    </div>
-                </div>
+                {% endif %}
             </div>    
         </div>
     </div>
