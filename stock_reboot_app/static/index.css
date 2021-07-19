@@ -254,7 +254,7 @@ input{
 #floating-logo{
     display: flex;
     height: 40px;
-    margin-left: 300px;
+    margin-left: 200px;
     margin-top: 20px;
     padding: 0px;
     margin-bottom: 0px;
@@ -275,7 +275,7 @@ input{
     height: 35px;
     width: 100%;
     margin-top: 10px;
-    margin-left: 243px;
+    margin-left: 143px;
     margin-bottom: 0px;
 }
 #dash-welcome{
@@ -314,14 +314,14 @@ input{
     padding-left: 40px;
     padding: 0px;
     width: 100%;
-    margin-left: 243px;
+    margin-left: 143px;
     padding-top: 20px;
 }
 #dash-stuff-profile{
     display: flex;
     background-color: #90a392;
     height: 700px;
-    margin-left: 243px;
+    margin-left: 143px;
     width: 100%;
     padding-top: 20px;
 }
