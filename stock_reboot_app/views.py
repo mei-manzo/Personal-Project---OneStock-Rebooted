@@ -137,16 +137,13 @@ def stats(request):
     number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
     portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     progress_dict = []
-    for object in this_stock:
-        URL = object.nasdaq_url
-        page = requests.get(URL)
-        soup = BeautifulSoup(page.content, 'html.parser')
-        # progress = list(soup)[1].find_all('div', class_="BNeawe iBp4i AP7Wnd")[0].prettify()
-        progress = soup.find_all('div', class_='ln0Gqe')
-        # print(progress_first)
-        # progress=list(list(soup.children)[1].children)[1].find_all('div', class_='ln0Gqe')
-        for number in progress:
-            progress_dict.append(number.text)
+    # for object in this_stock:
+    #     URL = object.nasdaq_url
+    #     page = requests.get(URL)
+    #     soup = BeautifulSoup(page.content, 'html.parser')
+    #     progress = soup.find_all('div', class_='ln0Gqe')
+    #     for number in progress:
+    #         progress_dict.append(number.text)
     context = {
             "current_user" : this_user[0].first_name,
             "progress_dict": progress_dict,
@@ -295,11 +292,8 @@ def load_save(request, headliner):
     return redirect(f"/save/{headliner}")
 
 def homeView(request, stock):
-
     this_user = User.objects.filter(id = request.session['user_id'])
-
     api_key = "CBTVFAZ73IOW7TH5"
-
     stock = f"{stock}"
 
     api_key = "CBTVFAZ73IOW7TH5"

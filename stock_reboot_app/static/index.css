@@ -46,7 +46,8 @@ body{
     width: 60%;
     margin-top: 0px;
     margin-left: 310px;
-    padding-bottom: 50px;
+    margin-bottom: 80px;
+    padding-bottom: 70px;
     border: 2px solid grey;
     border-width: thin;
     border-color: grey;
@@ -164,6 +165,8 @@ div{
     height: 20px;
     padding-top: 0px;
     margin-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
     display: flex;
 }
 hr{
@@ -251,7 +254,7 @@ input{
 #floating-logo{
     display: flex;
     height: 40px;
-    margin-left: 200px;
+    margin-left: 300px;
     margin-top: 20px;
     padding: 0px;
     margin-bottom: 0px;
@@ -272,7 +275,7 @@ input{
     height: 35px;
     width: 100%;
     margin-top: 10px;
-    margin-left: 13%;
+    margin-left: 243px;
     margin-bottom: 0px;
 }
 #dash-welcome{
@@ -311,7 +314,7 @@ input{
     padding-left: 40px;
     padding: 0px;
     width: 100%;
-    margin-left: 143px;
+    margin-left: 243px;
     padding-top: 20px;
 }
 #dash-stuff-profile{
@@ -370,8 +373,8 @@ input{
     margin-left: 110px;
     margin-bottom: 50px;
     margin-top: 0px;
-    height: 90px;
-    width: 180px;
+    height: 100px;
+    width: 100px;
     color: white;
     background-color: white;
     padding-top: 0px;
@@ -630,7 +633,10 @@ li{
 }
 #dash-stats-buy{
     background-color: white;
-    padding: 35px;
+    padding-left: 45px;
+    padding-top: 45px;
+    padding-bottom: 25px;
+    padding-right: 25px;
     margin-top: 20px;
     margin-left: 25px;
     margin-top: 0px;
@@ -824,5 +830,5 @@ background: linear-gradient(180deg, rgba(254,87,60,1) 48%, rgba(122,68,0,1) 100%
     margin-left: 200px;
 }
 #dash-news-all-new{
-    font-size: 1.5em;
+    font-size: 2em;
 }
