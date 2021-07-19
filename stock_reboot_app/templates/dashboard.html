@@ -58,9 +58,18 @@
                 {% endif %}
                 </div>
             </div>
-            <div id="dash-stats">Statistics
-                <div id="dash-stats-all">
-                    <p>Load your custom stats <a href="/stats">here</a>. Note: please allow 1-2 minutes for stats to generate.</p>
+            <div id="dash-news">Statistics
+                <div id="dash-news-all">
+                    {% if number_of_stocks == 0 %}
+                        <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click <a id ="dash-news-all-a" href="/profile">here</a>.</p>
+                    {% else %}
+                        <p id="you-have-new-news">View your charts by clicking on the stock.</p>
+                    <div id="small-news-container">
+                        {% for stock in portfolio %}
+                            <li><a id="" href="/graph/{{ stock.stock_name }}">{{ stock.stock_name }}</a></li>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 </div>
             </div>
         </div>

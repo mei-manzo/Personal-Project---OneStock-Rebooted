@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly.latest.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/css/dataTabkes.bootstrap4.min.css"></script>
+    <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">   
+    <title>Graph</title>
+</head>
+<body id="wavy-body">
+    <div id="floating-logo">
+        <img id="logo" src="{% static 'artsy_white_logo.png' %}" alt="one stock logo"><h1 id="one-stock-dash">neStock</h1>
+    </div>
+    <div id="dash-all">
+        <div id="navbar">
+            <h3 id="dash-welcome"> Welcome, {{ current_user }} </h3> 
+            <div id="dash-links-feed">
+                <a href="/success"> Dashboard </a> | <a href="/stats"> Statistics </a> | <a href="/buy_sell">Buy/Sell</a> | <a href="/profile">Profile</a> | <a href="/logout">Logout</a> 
+            </div>        
+        </div> 
+        <div id="dash-stuff">
+            <div id="dash-stats-buy">
+                <h2 id="stock-head">{{ stock }}</h2>
+                <div class="card mx-auto py-3">
+                    {{candlestick | safe}}
+                </div>
+            </div>    
+        </div>
+    </div>
+    <hr id="">
+    <div id="feed-bottom-line">
+        <h4>OneStock Investment Tools</h4>
+        <h5>Copyright 2020-2021. All rights reserved.</h5>
+    </div>
+</body>
+</html> 
+

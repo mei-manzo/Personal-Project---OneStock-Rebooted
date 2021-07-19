@@ -4,6 +4,15 @@ from .models import *
 from django.db.models import Count
 import requests, urllib.parse
 from bs4 import BeautifulSoup
+from matplotlib.pyplot import magnitude_spectrum
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.offline import plot
+from alpha_vantage.techindicators import TechIndicators
+from alpha_vantage.timeseries import TimeSeries
+import datetime
+from pandas import Timestamp
+import requests
 
 url_tuple = (
     ["GOOGL", 'https://www.google.com/search?q=google&rlz=1C1CHBF_enUS898US898&biw=1536&bih=534&tbm=nws&sxsrf=ALeKk02sMEdIqbvRgGDYGxQnCwwJCVwGfA%3A1625683430806&ei=5vXlYIfZMInM-gSr853ABA&oq=google&gs_l=psy-ab.3..0i433i131i67k1l2j0i433i67k1l2j0i433i131i67k1j0i433i67k1j0i433i131i67k1j0i433k1j0i433i67k1j0i67k1.28577185.28577714.0.28578680.6.3.0.2.2.0.265.549.0j2j1.3.0....0...1c.1.64.psy-ab..2.4.389...0i433i131k1.0.5KINMOYh_Pg', 'https://www.google.com/finance/quote/GOOGL:NASDAQ'],
@@ -126,6 +135,7 @@ def stats(request):
     this_user = User.objects.filter(id = request.session['user_id'])
     this_stock = Stock.objects.filter(user_id = request.session['user_id'])
     number_of_stocks = len(Stock.objects.filter(user=User.objects.get(id = request.session['user_id'])))
+    portfolio = Stock.objects.filter(user=User.objects.get(id = request.session['user_id']))
     progress_dict = []
     for object in this_stock:
         URL = object.nasdaq_url
@@ -142,6 +152,7 @@ def stats(request):
             "progress_dict": progress_dict,
             "this_stock": this_stock,
             "number_of_stocks": number_of_stocks,
+            "portfolio": portfolio,
         }
     return render(request, "nasdaq.html", context)
 
@@ -282,3 +293,102 @@ def load_save(request, headliner):
             "number_of_stocks": number_of_stocks,
         }
     return redirect(f"/save/{headliner}")
+
+def homeView(request, stock):
+
+    this_user = User.objects.filter(id = request.session['user_id'])
+
+    api_key = "CBTVFAZ73IOW7TH5"
+
+    stock = f"{stock}"
+
+    api_key = "CBTVFAZ73IOW7TH5"
+    period = 60
+
+    ts = TimeSeries(key=api_key, output_format="pandas",)
+    data_ts, meta_data_ts = ts.get_intraday(stock, interval="1min", outputsize ="compact")
+
+    ti = TechIndicators(key=api_key, output_format="pandas")
+    data_ti, meta_data_ti = ti.get_rsi(stock, interval='1min', time_period=period, series_type="close")
+
+    ts_df = data_ts
+    ti_df = data_ti
+
+    payload = {'function': 'OVERVIEW', 'symbol':'INTC', 'apikey':'CBTVFAZ73IOW7TH5'}
+    r = requests.get('https://www.alphavantage.co/query', params=payload)
+    r= r.json()
+
+    def candlestick():
+        figure=go.Figure(
+            data = [
+                    go.Candlestick(
+                        x = ts_df.index,
+                        high=ts_df['2. high'],
+                        low = ts_df['3. low'],
+                        open = ts_df['1. open'],
+                        close = ts_df['4. close'],
+                    )
+                ]
+        )
+
+        candlestick_div = plot(figure, output_type='div')
+        return candlestick_div
+    
+    sector = r['Sector']
+    marketcap = r['MarketCapitalization']
+    peratio = r['PERatio']
+    yearhigh = r['52WeekHigh']
+    yearlow = r['52WeekLow']
+    eps = r['EPS']
+
+    timeseries = ts_df.to_dict(orient='records')
+
+    closingprice = []
+    for k in timeseries:
+        closingprice.append(k['4. close'])
+
+    lowprice = []
+    for k in timeseries:
+        closingprice.append(k['3. low'])
+
+    highprice = []
+    for k in timeseries:
+        closingprice.append(k['2. high'])
+
+    openprice = []
+    for k in timeseries:
+        closingprice.append(k['1. open'])
+
+    day = datetime.datetime.now()
+    day = day.strftime("%A")
+
+    def human_format(num):
+        magnitude=0
+        while abs(num) >= 1000:
+            magnitude += 1
+            num /= 1000.0
+        return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
+
+    marketcap = int(marketcap)
+    marketcap = human_format(marketcap)
+
+    closingprice = closingprice[0:15]
+
+    context = {
+        "current_user" : this_user[0].first_name,
+        'sector': sector,
+        'marketcap': marketcap,
+        'peratio': peratio,
+        'yearhigh': yearhigh,
+        'yearlow': yearlow,
+        'eps': eps,
+        'closingprice': closingprice,
+        'openprice': openprice,
+        'highprice': highprice,
+        'lowprice': lowprice,
+        'timeseries': timeseries,
+        'stock': stock,
+        'day': day,
+        'candlestick': candlestick(),
+    }
+    return render(request, 'graph.html', context)

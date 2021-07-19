@@ -388,19 +388,19 @@ input{
     margin-bottom: 10px;
 }
 #amzn-logo{
-    width: 200px;
+    width: 100px;
     height: 100px;
     margin-top: 30px;
     padding-bottom: 50px;
 }
 #bynd-logo{
-    width: 400px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     margin-top: 30px;
     padding-bottom: 50px;
 }
 #googl-logo{
-    width: 200px;
+    width: 100px;
     height: 100px;
     margin-top: 30px;
     padding-bottom: 50px;
@@ -648,9 +648,11 @@ li{
     -webkit-box-shadow: 0px 0px 10px black;
     box-shadow: 0px 0px 5px black;
 }
-/* #dash-stats-buy h2{
-    font-size: small;
-} */
+#click-stock{
+    font-weight: lighter;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
 #nas-stats-container{
     display: flex;
@@ -816,4 +818,11 @@ background: linear-gradient(180deg, rgba(254,87,60,1) 48%, rgba(122,68,0,1) 100%
     margin-top: 0px;
     font-weight: lighter;
     font-size: 2em;
+}
+#stock-head{
+    font-weight: lighter;
+    margin-left: 200px;
+}
+#dash-news-all-new{
+    font-size: 1.5em;
 }

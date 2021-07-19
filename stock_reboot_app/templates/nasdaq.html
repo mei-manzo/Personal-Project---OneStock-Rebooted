@@ -22,23 +22,31 @@
         <div id="dash-stuff">
             <div id="dash-stats-buy">
                 <h2 id="">Your NASDAQ Stats</h2>
-                {% if number_of_stocks == 0 %}
-                    <p>You have no stocks being tracked. Click <a href="/profile">here</a> to get started.</p>
+                <!-- <div id="dash-stats-all">
+                    {% if number_of_stocks == 0 %}
+                    <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click <a id ="dash-news-all-a" href="/profile">here</a>.</p>
                 {% else %}
-                    <div id="nas-stats-container">
-                        <div id = "other-side">
-                            {% for stock in this_stock %}
-                            <p> {{ stock.stock_name }} </p>
-                            {% endfor %}
-                        </div>
-                        <div id = "one-side">
-                            {% for object in progress_dict %}
-                            <p>Stock Price: {{ object }} </p>
-                            {% endfor %}
-                        </div>
+                    <p id="you-have-new-news">View your charts by clicking on the stock.</p>
+                <div id="small-news-container">
+                    {% for stock in portfolio %}
+                        <li><a id="a-li" href="/graph/{{ stock.stock_name }}">{{ stock.stock_name }}</a></li>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                </div> -->
+                <div id="dash-news-all-new">
+                    {% if number_of_stocks == 0 %}
+                        <p id ="dash-news-all-p">You have no stocks in your portfolio. To get started, click <a id ="dash-news-all-a" href="/profile">here</a>.</p>
+                    {% else %}
+                        <p id="you-have-new-news">View your charts by clicking on the stock.</p>
+                    <div id="small-news-container">
+                        {% for stock in portfolio %}
+                            <li><a id="" href="/graph/{{ stock.stock_name }}">{{ stock.stock_name }}</a></li>
+                        {% endfor %}
                     </div>
                 {% endif %}
-            </div>    
+                </div>     
+            </div>   
         </div>
     </div>
     <hr id="">

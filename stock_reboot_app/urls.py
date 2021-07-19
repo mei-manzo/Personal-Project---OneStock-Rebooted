@@ -17,4 +17,5 @@ urlpatterns = [
     path('delete/<int:id>', views.delete),
     path('unsave_profile/<str:headliner>', views.unsave_profile),
     path('load_save/<str:headliner>', views.load_save),
+    path('graph/<str:stock>', views.homeView),
 ]
