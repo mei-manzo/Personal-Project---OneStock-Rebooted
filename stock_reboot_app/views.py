@@ -338,6 +338,7 @@ def homeView(request, stock):
     timeseries = ts_df.to_dict(orient='records')
 
     closingprice = []
+    
     for k in timeseries:
         closingprice.append(k['4. close'])
 
