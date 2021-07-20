@@ -37,6 +37,14 @@
     height: 30px;
 }
 
+#secure-logo{
+    padding-top: 25x;
+    margin-left: 1300px;
+    margin-top: 30px;
+    width: 30px;
+    height: 20px;
+}
+
 body{
     margin: 0px;
     background-color:lightgray;
